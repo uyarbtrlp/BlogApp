@@ -1,0 +1,96 @@
+﻿@model BlogApp.Models.LoginModel
+
+@{
+
+    ViewData["Title"] = "Login";
+}
+<head>
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <style>
+       
+        .form-group {
+           background-color:white;
+            border: 1px gray solid;
+            border-radius: .25rem;
+        }
+
+        .login {
+            position: absolute;
+            
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-top:12.5%
+        }
+
+        .validateCss {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            border-radius: .25rem;
+        }
+
+            .validateCss ul {
+                list-style: none
+            }
+
+                .validateCss ul li {
+                }
+
+                    .validateCss ul li::before {
+                        content: "\f06a";
+                        font-family: 'Font Awesome\ 5 Free';
+                        font-weight: 900;
+                        display: inline-block;
+                        margin-left: -1.3em; /* same as padding-left set on li */
+                        width: 1.3em;
+                    }
+    </style>
+</head>
+
+<body style="background-color: rgb(21, 32, 43)">
+
+        <form asp-controller="Home" asp-action="Login" enctype="multipart/form-data" method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                        <div class="login">
+
+
+                            <div class="form-group ">
+                                <div class="validateCss" asp-validation-summary="All">
+
+
+                                </div>
+                                <div class="p-2">
+
+
+                                    <label>Kullanıcı Adı</label>
+                                    @Html.TextBoxFor(i => i.Username, new { @class = "form-control" })
+
+                                    <label>Şifre</label>
+                                    @Html.PasswordFor(i => i.Password, new { @class = "form-control" })
+
+                                    <button type="submit" class="btn btn-primary mt-2">Giriş Yap</button>
+                                    <div class="varmı mt-2">
+                                        <p>Uyeliğin yok mu? Eğer normal kullanıcıysan hemen <a href="/Home/Register">üye ol.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            </form>
+
+
+    
+    
+</body>
+
+

@@ -1,0 +1,100 @@
+﻿@model BlogApp.Models.BlogModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+    <div class="container" style="padding-top:15px;color:whitesmoke">
+        <div class="col-lg-8">
+
+
+            <!-- Title -->
+            <div class="" style="position:relative">
+                <h1 class="">
+                    @Model.Title
+
+
+                </h1>
+
+            </div>
+
+
+            <!-- Author -->
+            <p class="lead">
+                Yazıyı yazan kişi:
+                <a href="/Home/UserBlogs/@Model.User.Id">@Model.User.Name @Model.User.Surname</a>
+            </p>
+
+            <hr style="border:0.5px solid white">
+
+            <!-- Date/Time -->
+            <p>@Model.Date tarihinde gönderildi.</p>
+            <ul style="float:right">
+                @if (Model.BlogCategories.Count == 0)
+                {
+                    <li class="badge badge-danger">Bu paylaşımın kategorisi bulunmamaktadır.</li>
+                }
+                @foreach (var category in Model.BlogCategories)
+                {
+                    <li class="badge badge-success mr-2" style="display:inline">
+                        @category.Category.Name
+                    </li>
+                }
+
+            </ul>
+
+            <hr style="border:0.5px solid white">
+
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="~/Upload/@Model.Image" alt="">
+
+            <hr>
+
+            <!-- Post Content -->
+            <p class="lead">@Model.Content</p>
+
+            <hr style="border:0.5px solid white">
+
+            <!-- Comments Form -->
+            <form asp-controller="Home" asp-action="AddComment">
+                <div class="card my-4">
+                    <h5 class="card-header" style="color:black">Yorum Yaz:</h5>
+                    <div class="card-body">
+                        <input type="hidden" name="id" asp-for="@Model.Id" />
+                        <div class="form-group">
+                            <textarea class="form-control" name="commentText" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Yorum Yap</button>
+
+                    </div>
+                </div>
+            </form>
+            @if (Model.Comments.Count() == 0)
+            {
+                <div class="alert alert-danger">
+                    Şu anda yorum bulunmamaktadır.
+                </div>
+            }
+            else
+            {
+                @foreach (var item in Model.Comments)
+                {
+                    <div class="media mb-4">
+                        <img class="d-flex mr-3 rounded-circle" width="100" height="100" src="~/Upload/@item.Photo" alt="">
+                        <div class="media-body">
+                            <h5 class="mt-0">@item.Name @item.Surname</h5>
+                            @item.CommentText
+                        </div>
+                    </div>
+                }
+            }
+            <!-- Single Comment -->
+
+
+
+
+        </div>
+
+    </div>
+
+   
+

@@ -1,0 +1,185 @@
+﻿@model BlogApp.Models.UserModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<head>
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
+    <style>
+        .footer {
+            background: white !important;
+        }
+
+        .form-group {
+            background: white;
+            border: 1px gray solid;
+            border-radius: .25rem;
+        }
+
+        .register {
+            position: absolute;
+            
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-top:12.5%
+        }
+
+        .validateCss {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            border-radius: .25rem;
+        }
+
+            .validateCss ul {
+                columns: 2;
+                -webkit-columns: 2;
+                -moz-columns: 2;
+                list-style: none
+            }
+
+                .validateCss ul li {
+                }
+
+                    .validateCss ul li::before {
+                        content: "\f06a";
+                        font-family: 'Font Awesome\ 5 Free';
+                        font-weight: 900;
+                        display: inline-block;
+                        margin-left: -1.3em; /* same as padding-left set on li */
+                        width: 1.3em;
+                    }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+
+
+
+<body style="background-color: rgb(21, 32, 43)">
+    <div class="container">
+        <form asp-controller="Home" asp-action="Register" enctype="multipart/form-data" method="post">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+
+
+                        <div class="register">
+
+
+
+                            <div class="form-group">
+                                <div class="validateCss" asp-validation-summary="All">
+
+
+                                </div>
+
+                                <div class="p-2">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="mt-1">İsim</label>
+                                            @Html.TextBoxFor(i => i.Name, new { @class = "form-control" })
+
+                                            <label class="mt-1">Soyisim</label>
+                                            @Html.TextBoxFor(i => i.Surname, new { @class = "form-control" })
+                                            <label class="mt-1">Telefon Numarası</label>
+                                            @Html.TextBoxFor(i => i.PhoneNumber, new { @class = "form-control", type = "tel", placeholder = "0555 555 5555", pattern = "[0-9]{4} [0-9]{3} [0-9]{4}", maxLength = "13" })
+                                            <button type="submit" id="submit" class="btn btn-primary mt-5">Kayıt Ol</button>
+
+
+
+
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="mt-1">Şifre</label>
+                                            @Html.PasswordFor(i => i.Password, new { @class = "form-control" })
+                                            <label class="mt-1">Kullanıcı Adı</label>
+                                            @Html.TextBoxFor(i => i.Username, new { @class = "form-control" })
+
+                                            <label class="mt-1">Email</label>
+                                            @Html.TextBoxFor(i => i.Email, new { @class = "form-control" })
+
+
+
+                                            <div class="mt-5">
+                                                <input id="input-b3" name="file" type="file" class="file"
+                                                       data-show-upload="false" data-show-caption="true" data-msg-placeholder="Lütfen resim dosyası seçiniz.">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                    <div class="varmı mt-2">
+                                        <p>Uyeliğin var mı? Hemen <a href="/Home/Login">Giriş yap.</a></p>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+
+    </div>
+    
+
+</body>
+
+
+
+@section Scripts{
+    <script src="https://kit.fontawesome.com/55f3df80f5.js" crossorigin="anonymous"></script>
+
+    <script src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script>
+        $("#input-b3").fileinput({
+            showPreview: false,
+            browseLabel: "Resim Seçiniz",
+            elErrorContainer: '#kartik-file-errors',
+            allowedFileExtensions: ["jpg", "png"]
+            //uploadUrl: '/site/file-upload-single'
+        });
+    </script>
+
+
+
+}
+
+

@@ -1,0 +1,122 @@
+﻿@model BlogApp.Models.BlogModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    textarea{
+        resize: none;
+    }
+</style>
+<link href="~/vendor/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
+<div class="container" style="padding-bottom:410px;color:whitesmoke">
+
+
+    <h1 class="pt-2">Yeni Paylaşım</h1>
+    <hr style="border:0.5px solid whitesmoke">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Blog" asp-action="Create" enctype="multipart/form-data" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label class="control-label">Başlık</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">İçerik</label>
+                    <textarea asp-for="Content" rows="12" class="form-control"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <div class="mt-3">
+                    <input id="input-b3" name="file" type="file" class="file"
+                           data-show-upload="false" data-show-caption="true" data-msg-placeholder="Lütfen resim dosyası seçiniz.">
+                </div>
+                <div class="btn-group mt-3" role="group" data-toggle="button" aria-label="Basic example">
+                    <ul>
+                        <li style="display:inline"><button style="margin-bottom:5px" type="button" id="bilim" class="btn btn-outline-info">Bilim</button></li>
+                        <li style="display:inline"><button style="margin-bottom:5px" type="button" id="spor" class="btn btn-outline-info">Spor</button></li>
+                        <li style="display:inline"><button style="margin-bottom:5px" type="button" id="Seyahat" class="btn btn-outline-info">Seyahat</button></li>
+                        <li style="display:inline"><button style="margin-bottom:5px" type="button" id="Film" class="btn btn-outline-info">Film</button></li>
+                        <li style="display:inline"><button style="margin-bottom:5px" type="button" id="Dizi" class="btn btn-outline-info">Dizi</button></li>
+                        <li style="display:inline"><button style="margin-bottom:5px" type="button" id="Sağlık" class="btn btn-outline-info">Sağlık</button></li>
+                    </ul>
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+                <input type="hidden" id="value" name="values" />
+
+
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-plus" style="margin-right:5px"></i>Ekle</button>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left" style="margin-right: 5px"></i>Listeye Geri Dön</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+    <script src="https://kit.fontawesome.com/55f3df80f5.js" crossorigin="anonymous"></script>
+
+    <script src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script>
+        $("#input-b3").fileinput({
+            showPreview: false,
+            browseLabel: "Resim Seçiniz",
+            elErrorContainer: '#kartik-file-errors',
+            allowedFileExtensions: ["jpg", "png"],
+            resizePreference: "width",
+            maxImageWidth: 800,
+            maxImageHeight: 600
+            //uploadUrl: '/site/file-upload-single'
+
+        });
+
+        document.getElementById("bilim").addEventListener("click", function () {
+            document.querySelector("#value").value += " " + document.querySelector("#bilim").textContent
+            console.log(document.querySelector("#value").value);
+
+        })
+        document.getElementById("spor").addEventListener("click", function () {
+
+            document.querySelector("#value").value += " " + document.querySelector("#spor").textContent
+            console.log(document.querySelector("#value").value);
+        })
+        document.getElementById("Seyahat").addEventListener("click", function () {
+            document.querySelector("#value").value += " " + document.querySelector("#Seyahat").textContent
+            console.log(document.querySelector("#value").value);
+
+        })
+        document.getElementById("Film").addEventListener("click", function () {
+
+            document.querySelector("#value").value += " " + document.querySelector("#Film").textContent
+            console.log(document.querySelector("#value").value);
+        })
+        document.getElementById("Dizi").addEventListener("click", function () {
+            document.querySelector("#value").value += " " + document.querySelector("#Dizi").textContent
+            console.log(document.querySelector("#value").value);
+
+        })
+        document.getElementById("Sağlık").addEventListener("click", function () {
+
+            document.querySelector("#value").value += " " + document.querySelector("#Sağlık").textContent
+            console.log(document.querySelector("#value").value);
+        })
+
+
+
+
+    </script>
+}
+

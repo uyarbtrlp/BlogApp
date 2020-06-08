@@ -1,0 +1,112 @@
+﻿@model BlogApp.Models.BlogModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    ul {
+        padding-inline-start: 0px;
+        margin-block-end: 0;
+    }
+</style>
+<div class="container" style="padding-top:20px;color:whitesmoke">
+    <h3>Blogu Güncelle</h3>
+    <hr style="border:0.5px solid white" />
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="col-lg-8">
+
+            <div class="form-group" style="display:none;">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <!-- Title -->
+            <label class="mt-4">Başlık</label>
+            <input type="text" asp-for="Title" class=" form-control">
+
+            <!-- Author -->
+            <p class="lead">
+                Yazıyı yazan kişi:
+                <a href="/Blog/Index">@Model.User.Name - @Model.User.Surname</a>
+            </p>
+
+            <hr style="border:0.5px solid white" />
+
+            <!-- Date/Time -->
+            <p>
+                @Model.Date tarihinde gönderildi.<ul style="float:right">
+                    @if (Model.BlogCategories.Count == 0)
+                    {
+                        <li class="badge badge-danger">Bu paylaşımın kategorisi bulunmamaktadır.</li>
+                    }
+                    @foreach (var item in Model.BlogCategories)
+                    {
+                        <li class="badge badge-success mr-2" style="display:inline">@item.Category.Name</li>
+                    }
+                </ul>
+            </p>
+
+
+            <input type="hidden" id="value" name="values" />
+            <div class="form-group" style="display:none;">
+
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <hr style="border:0.5px solid white" />
+
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="~/Upload/@Model.Image" alt="">
+            <div class="form-group d-none">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <hr style="border:0.5px solid white" />
+
+            <!-- Post Content -->
+            <div class="form-group">
+                <label>İçerik</label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <hr style="border:0.5px solid white" />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-edit" style="margin-right:5px"></i>Güncelle</button>
+
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left" style="margin-right:5px"></i>Listeye Geri Dön</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+@section Scripts{
+    <script src="https://kit.fontawesome.com/55f3df80f5.js" crossorigin="anonymous"></script>
+
+    <script src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script>
+
+
+
+
+
+
+
+    </script>
+}
+
+
+
+

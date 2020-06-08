@@ -1,0 +1,171 @@
+﻿@model IEnumerable<BlogApp.Models.BlogModel>
+
+@{
+    ViewData["Title"] = "Index";
+    string username = ViewData["Username"].ToString();
+    string name = ViewData["Name"].ToString();
+    string surname = ViewData["Surname"].ToString();
+    string phone = ViewData["Phone"].ToString();
+    string email = ViewData["Email"].ToString();
+    string photo = ViewData["Photo"].ToString();
+
+}
+<style>
+    ul {
+        padding-inline-start: 0px;
+        margin-block-end: 0;
+    }
+
+    .row {
+        margin-right: 0px
+    }
+    .mobil {
+        padding-bottom:617px;
+
+    }
+    @@media screen and (max-width:1024px) {
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .mobil {
+            margin-bottom: 397px;
+        }
+    }
+
+
+    @@media screen and (max-width:769px) {
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .mobil {
+            margin-bottom: 55px;
+        }
+    }
+
+    @@media screen and (max-width:767px) {
+        .col-md-10 {
+            margin-left: 15px
+        }
+
+        #yazı {
+            margin-top: 20px
+        }
+
+        .col-md-6 {
+            left: 30px
+        }
+
+        .mobil {
+            padding-bottom: 300px
+        }
+    }
+
+    hr {
+        border: 0.5px solid white
+    }
+    
+</style>
+<div class="row">
+    <div class="col-md-2" style="background-color:#717aa6;margin-bottom:-30px">
+
+        <img class="rounded-circle mt-2" style="display: block; margin-left: auto; margin-right: auto" width="100" height="100" src="~/Upload/@photo" alt="">
+        <div class="media-body text-center">
+            <p class="mt-1">@username</p>
+            <p class="mt-0">@name @surname</p>
+            <p style="word-break:break-word">@phone</p>
+            <p style="word-break:break-word">@email</p>
+
+
+
+        </div>
+
+
+
+    </div>
+    @if (Model.Count() == 0)
+    {
+        <div class="col-md-10 mobil" style="padding-top: 15px">
+            <h1 id="yazı" style="color:white">Yazılarım</h1>
+            <hr />
+            <p>
+                <a class="btn btn-success" asp-action="Create"><i class="fas fa-plus" style="margin-right:5px"></i>Yeni Yazı Oluştur</a>
+            </p>
+            <div class="alert alert-danger">Kayıt bulunamadı.</div>
+
+        </div>
+
+    }
+    else
+    {
+        <div class="col-md-10" style="padding-top: 15px">
+            <h1 id="yazı" style="color:white">Yazılarım</h1>
+            <hr />
+            <p>
+                <a class="btn btn-success" asp-action="Create"><i class="fas fa-plus" style="margin-right:5px"></i>Yeni Yazı Oluştur</a>
+            </p>
+
+
+            <div class="row" style="margin-right:50px">
+
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <img class="card-img-top" height="525" src="~/upload/@item.Image" alt="Card image cap">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    @item.Title
+                                    <a href="/Blog/Delete/@item.Id" class="btn btn-danger float-right"><i class="fas fa-trash-alt" style="margin-right:5px"></i>Sil</a>
+                                </h2>
+
+                                <p class="card-text">@item.Content</p>
+                                <a href="/Blog/Details/@item.Id" class="btn btn-primary">→ Detay </a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                @item.Date tarihinde
+                                <a href="#">@item.User.Name @item.User.Surname</a> tarafından gönderildi.
+                                <ul>
+                                    @if (item.BlogCategories.Count == 0)
+                                    {
+                                        <li style="word-break:break-all" class="badge badge-danger text-center">Bu paylaşımın kategorisi bulunmamaktadır.</li>
+                                    }
+                                    @foreach (var category in item.BlogCategories)
+                                    {
+                                        <li class="badge badge-success mr-2" style="display: inline">
+                                            @category.Category.Name
+                                        </li>
+                                    }
+
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    
+
+
+
+
+
+
+                }
+
+
+            </div>
+        </div>
+    }
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KuaforApp</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        ul li a:hover{
+            color:gainsboro !important
+        }
+        nav a:hover{
+              color:gainsboro !important
+        }
+        @@media only screen and (max-width: 2000px) {
+
+            .dropdown {
+                margin-left: 70%;
+            }
+
+            .admin {
+                margin-left: 70%;
+            }
+        }
+
+        @@media only screen and (max-width: 1200px) {
+
+            .dropdown {
+                margin-left: 55%;
+            }
+
+            .admin {
+                margin-left: 55%;
+            }
+        }
+
+        @@media only screen and (max-width: 854px) {
+
+            .dropdown {
+                margin-left: 45%;
+            }
+
+            .admin {
+                margin-left: 45%;
+            }
+        }
+
+        @@media only screen and (max-width: 768px) {
+
+
+            .dropdown {
+                margin-left: 40%;
+            }
+
+            .admin {
+                margin-left: 40%;
+            }
+        }
+
+        @@media only screen and (max-width: 594px) {
+
+
+            .dropdown {
+                margin-left: 0%;
+            }
+
+            .admin {
+                margin-left: 0%;
+            }
+        }
+
+        @@media only screen and (max-width: 361px) {
+
+
+            .dropdown {
+                margin-left: 0%;
+            }
+
+            .admin {
+                margin-left: 0%;
+            }
+
+            .footer {
+                display: block;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow justify-content-between" style="background-color:#573fe0;color:white">
+
+            <a class="navbar-brand text-white" style="margin-left:12.5%" asp-area="" asp-controller="Home" asp-action="Index">BlogApp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-white"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1 mt-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Blog" asp-action="Index">Blogum</a>
+                    </li>
+                  
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item admin">
+
+
+                            <a class="nav-link text-white" asp-area="" asp-controller="Blog" asp-action="Index">@User.Identity.Name</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Logout">Çıkış Yap</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white" href="/Home/Register">Kayıt Ol</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Login">Giriş Yap</a>
+                        </li>
+                    }
+
+
+
+
+                </ul>
+
+            </div>
+
+        </nav>
+    </header>
+    
+        <main role="main" class="pb-3" style="background-color: rgb(21, 32, 43);">
+            @RenderBody()
+        </main>
+    
+    <footer class="border-top footer text-muted" style="background:white;border-top:1px solid #e5e5e5">
+        <div class="container">
+            &copy; 2020 - BlogApp 
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/55f3df80f5.js" crossorigin="anonymous"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
